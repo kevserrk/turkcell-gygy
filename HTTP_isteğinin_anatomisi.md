@@ -80,3 +80,11 @@ Head: Sunucuya aynı Get metodu gibi ancak sadece başlığı olan (Request Head
 Options: Sunucunun desteklediği metotları kontrol etmek için kullanılır.
 
 Trace: Bu metod ile bir sunucuya istek gönderdiğinizde, aradaki tüm vekil sunucular (Proxy, Gateway) isteğin başlığına kendi IP veya DNS biglilerini eklerler. Genellikle hata ayıklama işleri için kullanılır.
+
+******
+
+API(Application Programming Interface) : Bir uygulamaya ait fonksiyonların diğer bir uygulamada da kullanılabilmesi için oluşturulmuş bir arayüzdür. İki yazılımın veya veritabanının birbiri ile sorunsuz çalışabilmesini ve birbiri ile iletişime geçmesini sağlar.
+
+REST(REpresentational State Transfer): client ile server arasında hızlı ve kolay şekilde iletişim kurulmasını sağlayan bir servis yapısıdır. REST, servis yönelimli mimari üzerine oluşturulan yazılımlarda kullanılan bir veri transfer yöntemidir. HTTP üzerinde çalışır ve diğer alternatiflere göre daha basittir, minimum içerikle veri alıp gönderdiği için de daha hızlıdır. Client ile server arasında XML veya JSON verilerini taşıyarak uygulamaların haberleşmesini sağlar. REST standartlarına uygun yazılan web servislerinede RESTful servisler denir.
+
+Postman: REST servislere kolayca request gönderebilmemize imkan tanıyan bir uygulamadır. Açık olarak sunulan bir REST API ile Postman üzerinden örnek işlemler gerçekleştirilebilir. 
