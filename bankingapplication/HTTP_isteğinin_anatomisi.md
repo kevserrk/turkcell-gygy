@@ -58,7 +58,7 @@ Genellikle bir URL olan istek veya protokolün, bağlantı noktasının ve etki 
 
 
 
-###HTTP Metodları
+### HTTP Metodları
 
 HTTP sunucuya yapılacak olan isteğin tipini belirlemek için farklı methodlar kullanır.Bunlar:
 
