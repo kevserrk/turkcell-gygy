@@ -33,6 +33,7 @@ Headers
 <img width="750" height="377" alt="Ekran Resmi 2026-04-13 11 18 26" src="https://github.com/user-attachments/assets/57771163-ba72-426e-9588-2b84d5123437" />
 
 
+
 Body
 
 •	İlgili istek talebinin en son aşaması gövde kısmıdır.
@@ -53,6 +54,7 @@ Body
 · Body (optional) — (Example:{“q”: ”test”})
 
   <img width="656" height="221" alt="public" src="https://github.com/user-attachments/assets/40f24aee-7d03-4883-ab2a-04fe27f17bc1" />
+
 
 
 HTTP Metodları
