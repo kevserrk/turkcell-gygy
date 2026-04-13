@@ -30,7 +30,8 @@ Headers
 
 •	Representation headers, başlık alanı mesaj verilerinin orijinal biçimini ve uygulanan herhangi bir kodlamayı tanımlar.
 
-                        <img width="750" height="377" alt="Ekran Resmi 2026-04-13 11 18 26" src="https://github.com/user-attachments/assets/9f113f0c-1c7b-462a-aa25-4b3026b495d1" />
+<img width="750" height="377" alt="Ekran Resmi 2026-04-13 11 18 26" src="https://github.com/user-attachments/assets/57771163-ba72-426e-9588-2b84d5123437" />
+
 
 Body
 
@@ -51,7 +52,8 @@ Body
 
 · Body (optional) — (Example:{“q”: ”test”})
 
-                      <img width="656" height="221" alt="public" src="https://github.com/user-attachments/assets/b6658b68-425e-485f-bf9e-7b02d704ad60" />
+  <img width="656" height="221" alt="public" src="https://github.com/user-attachments/assets/40f24aee-7d03-4883-ab2a-04fe27f17bc1" />
+
 
 HTTP Metodları
 
