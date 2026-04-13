@@ -1,10 +1,10 @@
-HTTP (Hyper Text Transfer Protocol), server ile client arasındaki iletişimi sağlamak için tasarlanmış bir haberleşme protokolüdür. Client, server tarafına bir request gönderir ve bu içeriğine göre serverda bir karşılık bulur ardından server bu işlem için client’a bir response döner.
+**HTTP** (Hyper Text Transfer Protocol), server ile client arasındaki iletişimi sağlamak için tasarlanmış bir haberleşme protokolüdür. Client, server tarafına bir request gönderir ve bu içeriğine göre serverda bir karşılık bulur ardından server bu işlem için client’a bir response döner.*
 
-HTTP isteği (HTTP request), sunucuda bir eylem başlatmak ve erişilmek istenilen kaynağı yüklemek için ihtiyaç duyulan kaynakların yüklenebilmesi için istemci tarafından gönderilen mesajlardır.
+**HTTP isteği** (HTTP request), sunucuda bir eylem başlatmak ve erişilmek istenilen kaynağı yüklemek için ihtiyaç duyulan kaynakların yüklenebilmesi için istemci tarafından gönderilen mesajlardır.
 
-HTTP İSTEĞİNİN ANATOMİSİ
+# HTTP İSTEĞİNİN ANATOMİSİ
 
-Start Line
+## Start Line
 Başlangıç satırları 3 ana öğe içerir:
 İstemci tarafından hedef kaynağa gönderilen isteğin, gerçekleştirmek istediği amacı açıklayan bir HTTP metodu.(POST, PUT, GET, DELETE)
 
@@ -20,7 +20,7 @@ Genellikle bir URL olan istek veya protokolün, bağlantı noktasının ve etki 
 
   •	OPTIONS /anypage.html HTTP/1.0
 
-Headers
+## Headers
 
 İstemci tarafından gelen istekler başlıklar içerir. Başlıklar bir sunucunun istemciden gelen isteklere nasıl yanıt vereceği konusunda ek bilgiler içerebilir.
 
@@ -34,7 +34,7 @@ Headers
 
 
 
-Body
+## Body
 
 •	İlgili istek talebinin en son aşaması gövde kısmıdır.
 
@@ -57,7 +57,7 @@ Body
 
 
 
-HTTP Metodları
+### HTTP Metodları
 
 HTTP sunucuya yapılacak olan isteğin tipini belirlemek için farklı methodlar kullanır.Bunlar:
 
