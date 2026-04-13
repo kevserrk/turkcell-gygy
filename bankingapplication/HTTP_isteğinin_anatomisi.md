@@ -62,25 +62,25 @@ Genellikle bir URL olan istek veya protokolün, bağlantı noktasının ve etki 
 
 HTTP sunucuya yapılacak olan isteğin tipini belirlemek için farklı methodlar kullanır.Bunlar:
 
-Get: Sunucuda halihazırda bulunan bir kaynağa erişim için kullanılır.
+* Get: Sunucuda halihazırda bulunan bir kaynağa erişim için kullanılır.
 
-Post: Sunucu üzerinde yeni bir kaynak oluşturmak için kullanılır. Post istekleri genellikle yeni oluşturulacak kaynağa ait bilgiyi de taşırlar.
+* Post: Sunucu üzerinde yeni bir kaynak oluşturmak için kullanılır. Post istekleri genellikle yeni oluşturulacak kaynağa ait bilgiyi de taşırlar.
 
-Put: Sunucudaki bir kaynağı güncellemek için kullanılır. Bu istekler de genellikle üzerilerinde değiştirilmek istenen bilgiyi taşırlar.
+* Put: Sunucudaki bir kaynağı güncellemek için kullanılır. Bu istekler de genellikle üzerilerinde değiştirilmek istenen bilgiyi taşırlar.
 
-Patch: Bu metot da sunucudaki bir kaynağı değiştirmek için kullanılır. Put ile arasındaki fark ise Put sunucudaki kaynağı yeni bir kaynak ile değiştirmek için kullanılır iken, Patch bu kaynağında bir kısmını değiştirmeye yarar.
+* Patch: Bu metot da sunucudaki bir kaynağı değiştirmek için kullanılır. Put ile arasındaki fark ise Put sunucudaki kaynağı yeni bir kaynak ile değiştirmek için kullanılır iken, Patch bu kaynağında bir kısmını değiştirmeye yarar.
 
-Delete: Sunucudaki bir kaynağı silmeye yarar.
+* Delete: Sunucudaki bir kaynağı silmeye yarar.
 
 Daha az kullanılan metodlar:
 
-Connect: Sunucu ile bir bağlantı oluşturma isteği gönderir. Sunucu bağlantılarını minimum yük ile test etme olanağı sağlar.
+* Connect: Sunucu ile bir bağlantı oluşturma isteği gönderir. Sunucu bağlantılarını minimum yük ile test etme olanağı sağlar.
 
-Head: Sunucuya aynı Get metodu gibi ancak sadece başlığı olan (Request Header), gövdesi olmayan(Request Body) bir istek gönderir. Genellikle sunucuda bir kaynak mevcut mu veya kaynağın en son güncellenme bilgisi için kullanılır.
+* Head: Sunucuya aynı Get metodu gibi ancak sadece başlığı olan (Request Header), gövdesi olmayan(Request Body) bir istek gönderir. Genellikle sunucuda bir kaynak mevcut mu veya kaynağın en son güncellenme bilgisi için kullanılır.
 
-Options: Sunucunun desteklediği metotları kontrol etmek için kullanılır.
+* Options: Sunucunun desteklediği metotları kontrol etmek için kullanılır.
 
-Trace: Bu metod ile bir sunucuya istek gönderdiğinizde, aradaki tüm vekil sunucular (Proxy, Gateway) isteğin başlığına kendi IP veya DNS biglilerini eklerler. Genellikle hata ayıklama işleri için kullanılır.
+* Trace: Bu metod ile bir sunucuya istek gönderdiğinizde, aradaki tüm vekil sunucular (Proxy, Gateway) isteğin başlığına kendi IP veya DNS biglilerini eklerler. Genellikle hata ayıklama işleri için kullanılır.
 
 ******
 
