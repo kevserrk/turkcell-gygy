@@ -19,7 +19,7 @@ public class Main {
             System.out.println( "yetki verildi");
         }
         else{
-            System.out.println( "yetki veirlmedi");
+            System.out.println( "yetki verilmedi");
         }
 
        // public static void calculateGrade(int grade)
