@@ -1,43 +1,50 @@
 package com.turkcell.library_system.controller;
 
-import java.util.List;
-
+import com.turkcell.library_system.dto.author.CreateAuthorRequest;
+import com.turkcell.library_system.dto.author.UpdateAuthorRequest;
+import com.turkcell.library_system.dto.author.CreatedAuthorResponse;
+import com.turkcell.library_system.dto.author.ListAuthorResponse;
+import com.turkcell.library_system.service.AuthorServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import com.turkcell.library_system.dto.author.*;
-import com.turkcell.library_system.service.AuthorService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/authors")
 public class AuthorController {
 
-    private final AuthorService authorService;
+    private final AuthorServiceImpl authorService;
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorServiceImpl authorService) {
         this.authorService = authorService;
     }
 
+    // CREATE
     @PostMapping
-    public CreatedAuthorResponse create(@RequestBody CreateAuthorRequest request) {
-        return authorService.create(request);
+    public CreatedAuthorResponse add(@RequestBody CreateAuthorRequest request) {
+        return authorService.add(request);
     }
 
+    // GET ALL
     @GetMapping
     public List<ListAuthorResponse> getAll() {
         return authorService.getAll();
     }
 
+    // GET BY ID
     @GetMapping("/{id}")
     public ListAuthorResponse getById(@PathVariable Long id) {
         return authorService.getById(id);
     }
 
+    // UPDATE
     @PutMapping("/{id}")
-    public CreatedAuthorResponse update(@RequestBody UpdateAuthorRequest request,
-                                        @PathVariable Long id) {
-        return authorService.update(request, id);
+    public ListAuthorResponse update(@PathVariable Long id,
+                                     @RequestBody UpdateAuthorRequest request) {
+        return authorService.update(id, request);
     }
 
+    // DELETE
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         authorService.delete(id);
