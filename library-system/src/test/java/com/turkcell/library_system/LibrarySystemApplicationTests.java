@@ -1,10 +1,10 @@
-package com.turkcell.library;
+package com.turkcell.library_system;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LibraryApplicationTests {
+class LibrarySystemApplicationTests {
 
 	@Test
 	void contextLoads() {
