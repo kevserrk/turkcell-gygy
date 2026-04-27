@@ -6,27 +6,12 @@ public class UpdateBookRequest {
     private Integer publicationYear;
     private Integer copiesTotal;
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public Integer getPublicationYear() {
-        return publicationYear;
-    }
+    public Integer getPublicationYear() { return publicationYear; }
+    public void setPublicationYear(Integer publicationYear) { this.publicationYear = publicationYear; }
 
-    public Integer getCopiesTotal() {
-        return copiesTotal;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPublicationYear(Integer publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    public void setCopiesTotal(Integer copiesTotal) {
-        this.copiesTotal = copiesTotal;
-    }
+    public Integer getCopiesTotal() { return copiesTotal; }
+    public void setCopiesTotal(Integer copiesTotal) { this.copiesTotal = copiesTotal; }
 }
