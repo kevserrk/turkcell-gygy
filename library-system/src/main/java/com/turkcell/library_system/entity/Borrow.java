@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "borrow")
+
 public class Borrow {
 
     @Id
@@ -25,4 +26,44 @@ public class Borrow {
     private LibraryStaff issuedBy;
 
     
+
+    public Integer getBorrowId() {
+        return borrowId;
+    }
+
+    public void setBorrowId(Integer borrowId) {
+        this.borrowId = borrowId;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public LocalDate getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(LocalDate borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
+    public LibraryStaff getIssuedBy() {
+        return issuedBy;
+    }
+
+    public void setIssuedBy(LibraryStaff issuedBy) {
+        this.issuedBy = issuedBy;
+    }
 }
