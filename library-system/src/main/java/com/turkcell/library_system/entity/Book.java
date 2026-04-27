@@ -1,6 +1,7 @@
 package com.turkcell.library_system.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -11,14 +12,17 @@ public class Book {
     @Column(name = "book_id")
     private Integer bookId;
 
-    @Column(name = "title", nullable = false, length = 100)
     private String title;
-
-    @Column(name = "publication_year")
     private Integer publicationYear;
-
-    @Column(name = "copies_total")
     private Integer copiesTotal;
+
+    @ManyToMany
+    @JoinTable(
+        name = "book_author",
+        joinColumns = @JoinColumn(name = "book_id"),
+        inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private List<Author> authors;
 
     // Getter Setter
     public Integer getBookId() { return bookId; }
