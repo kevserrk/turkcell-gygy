@@ -10,4 +10,5 @@ import com.turkcell.spring_starter.entity.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, UUID>
 {
+    
 }
