@@ -8,44 +8,28 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
+    @Column(name = "book_id")
+    private Integer bookId;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "title", nullable = false, length = 100)
     private String title;
 
+    @Column(name = "publication_year")
     private Integer publicationYear;
 
-    private Integer copiesTotal = 1;
+    @Column(name = "copies_total")
+    private Integer copiesTotal;
 
-    public Long getBookId() {
-        return bookId;
-    }
+    // Getter Setter
+    public Integer getBookId() { return bookId; }
+    public void setBookId(Integer bookId) { this.bookId = bookId; }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public Integer getPublicationYear() { return publicationYear; }
+    public void setPublicationYear(Integer publicationYear) { this.publicationYear = publicationYear; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getPublicationYear() {
-        return publicationYear;
-    }
-
-    public void setPublicationYear(Integer publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    public Integer getCopiesTotal() {
-        return copiesTotal;
-    }
-
-    public void setCopiesTotal(Integer copiesTotal) {
-        this.copiesTotal = copiesTotal;
-    }
+    public Integer getCopiesTotal() { return copiesTotal; }
+    public void setCopiesTotal(Integer copiesTotal) { this.copiesTotal = copiesTotal; }
 }
