@@ -2,6 +2,7 @@ package com.turkcell.library_system.service;
 
 import com.turkcell.library_system.dto.fine.*;
 import com.turkcell.library_system.entity.*;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,10 @@ public class FineServiceImpl {
     public CreatedFineResponse add(CreateFineRequest request) {
 
         Student student = studentRepository.findById(request.getStudentId())
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new BusinessException("Student not found","STUDENT_NOT_FOUND"));
 
         Borrow borrow = borrowRepository.findById(request.getBorrowId())
-                .orElseThrow(() -> new RuntimeException("Borrow not found"));
+                .orElseThrow(() -> new BusinessException("Borrow not found","BORROW_NOT_FOUND"));
 
         Fine fine = new Fine();
         fine.setStudent(student);

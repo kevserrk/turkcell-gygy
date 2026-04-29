@@ -2,6 +2,7 @@ package com.turkcell.library_system.service;
 
 import com.turkcell.library_system.dto.libraryStaff.*;
 import com.turkcell.library_system.entity.LibraryStaff;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.LibraryStaffRepository;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class LibraryStaffServiceImpl {
 
     public ListLibraryStaffResponse getById(Integer id) {
         LibraryStaff staff = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Staff not found"));
+                .orElseThrow(() -> new BusinessException("Staff not found","STAFF_NOT_FOUND"));
 
         ListLibraryStaffResponse response = new ListLibraryStaffResponse();
         response.setStaffId(staff.getStaffId());
