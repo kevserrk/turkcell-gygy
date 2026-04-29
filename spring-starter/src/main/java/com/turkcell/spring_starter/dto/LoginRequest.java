@@ -9,7 +9,7 @@ public class LoginRequest {
     @Email(message = "Geçerli bir email giriniz")
     private String email;
 
-    @NotBlank(message = "Şifre boş olamaz")
+    @NotBlank(message = "Parola boş olamaz")
     private String password;
 
     public String getEmail() {

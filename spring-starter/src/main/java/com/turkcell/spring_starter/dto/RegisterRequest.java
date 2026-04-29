@@ -1,6 +1,8 @@
 package com.turkcell.spring_starter.dto;
 
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,8 +13,8 @@ public class RegisterRequest {
     @Email(message = "Geçerli bir email giriniz")
     private String email;
 
-    @NotBlank(message = "Şifre boş olamaz")
-    @Size(min = 3, message = "Şifre en az 3 karakter olmalı")
+    @NotBlank(message = "Parola boş olamaz")
+    @Length(min=6, max=100, message = "Parola en az 6, en fazla 100 karakter olabilir.") 
     private String password;
 
     public String getEmail() {
