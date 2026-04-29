@@ -5,6 +5,7 @@ import com.turkcell.library_system.dto.author.UpdateAuthorRequest;
 import com.turkcell.library_system.dto.author.CreatedAuthorResponse;
 import com.turkcell.library_system.dto.author.ListAuthorResponse;
 import com.turkcell.library_system.entity.Author;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class AuthorServiceImpl {
     // GET BY ID
     public ListAuthorResponse getById(Long id) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new BusinessException("Author not found"));
 
         ListAuthorResponse response = new ListAuthorResponse();
         response.setAuthorId(author.getAuthorId());
@@ -66,7 +67,7 @@ public class AuthorServiceImpl {
     // UPDATE
     public ListAuthorResponse update(Long id, UpdateAuthorRequest request) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new BusinessException("Author not found"));
 
         author.setFirstName(request.getFirstName());
         author.setLastName(request.getLastName());
