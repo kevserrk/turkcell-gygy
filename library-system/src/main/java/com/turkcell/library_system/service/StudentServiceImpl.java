@@ -5,6 +5,7 @@ import com.turkcell.library_system.dto.student.UpdateStudentRequest;
 import com.turkcell.library_system.dto.student.CreatedStudentResponse;
 import com.turkcell.library_system.dto.student.ListStudentResponse;
 import com.turkcell.library_system.entity.Student;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class StudentServiceImpl {
     //  GET BY ID
     public ListStudentResponse getById(Integer id) {
         Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new BusinessException("Student not found","STUDENT_NOT_FOUND"));
 
         ListStudentResponse response = new ListStudentResponse();
         response.setStudentId(student.getStudentId());
@@ -70,7 +71,7 @@ public class StudentServiceImpl {
     // UPDATE
     public ListStudentResponse update(Integer id, UpdateStudentRequest request) {
         Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new BusinessException("Student not found","STUDENT_NOT_FOUND"));
 
         student.setFirstName(request.getFirstName());
         student.setLastName(request.getLastName());

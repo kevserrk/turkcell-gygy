@@ -2,6 +2,8 @@ package com.turkcell.library_system.service;
 
 import com.turkcell.library_system.dto.reservation.*;
 import com.turkcell.library_system.entity.*;
+import com.turkcell.library_system.exception.BookNotFoundException;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,13 @@ public class ReservationServiceImpl {
     public CreatedReservationResponse add(CreateReservationRequest request) {
 
         Book book = bookRepository.findById(request.getBookId())
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException());
 
         Student student = studentRepository.findById(request.getStudentId())
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new BusinessException("Student not found","STUDENT_NOT_FOUND"));
 
         ReservationStatus status = statusRepository.findById(request.getStatusId())
-                .orElseThrow(() -> new RuntimeException("Status not found"));
+                .orElseThrow(() -> new BusinessException("Status not found","STATUS_NOT_FOUND"));
 
         Reservation reservation = new Reservation();
         reservation.setBook(book);

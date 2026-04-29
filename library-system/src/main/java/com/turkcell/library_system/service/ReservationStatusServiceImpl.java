@@ -2,6 +2,7 @@ package com.turkcell.library_system.service;
 
 import com.turkcell.library_system.dto.reservationStatus.*;
 import com.turkcell.library_system.entity.ReservationStatus;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.ReservationStatusRepository;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ public class ReservationStatusServiceImpl {
     // GET BY ID
     public ListReservationStatusResponse getById(Integer id) {
         ReservationStatus status = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Status not found"));
+                .orElseThrow(() -> new BusinessException("Status not found","STATUS_NOT_FOUND"));
 
         ListReservationStatusResponse response = new ListReservationStatusResponse();
         response.setStatusId(status.getStatusId());
@@ -59,7 +60,7 @@ public class ReservationStatusServiceImpl {
     // UPDATE
     public ListReservationStatusResponse update(Integer id, UpdateReservationStatusRequest request) {
         ReservationStatus status = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Status not found"));
+                .orElseThrow(() -> new BusinessException("Status not found","STATUS_NOT_FOUND"));
 
         status.setStatusValue(request.getStatusValue());
 
