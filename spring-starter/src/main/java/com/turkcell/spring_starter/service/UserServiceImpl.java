@@ -3,8 +3,12 @@ package com.turkcell.spring_starter.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.turkcell.spring_starter.dto.LoginRequest;
 import com.turkcell.spring_starter.dto.RegisterRequest;
 import com.turkcell.spring_starter.entity.User;
+import com.turkcell.spring_starter.exception.BusinessException;
+import com.turkcell.spring_starter.exception.UserAlreadyExistsException;
+import com.turkcell.spring_starter.exception.UserNotFoundException;
 import com.turkcell.spring_starter.repository.UserRepository;
 
 @Service
@@ -19,13 +23,40 @@ public class UserServiceImpl {
 
     public void registerUser(RegisterRequest registerRequest) {
 
+        User userWithSameEmail = userRepository
+            .findByEmail(registerRequest.getEmail())
+            .orElse(null);
+
+        if (userWithSameEmail != null) {
+        throw new UserAlreadyExistsException("Bu e-posta zaten kayıtlı.");
+        }
+
         User user = new User();
         user.setEmail(registerRequest.getEmail());
 
-        String encodedPassword = this.passwordEncoder.encode(registerRequest.getPassword());
-        user.setPassword(encodedPassword); // PLAIN - Düz kaydetme!
-
+        String encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
+        user.setPassword(encodedPassword);
 
         userRepository.save(user);
+        }
+
+    public String login(LoginRequest loginRequest) {
+
+        String errorMessage = "Giriş bilgileri yanlış";
+
+        User user = userRepository
+            .findByEmail(loginRequest.getEmail())
+            .orElseThrow(() -> new UserNotFoundException(errorMessage));
+
+        boolean passwordMatch = passwordEncoder.matches(
+            loginRequest.getPassword(),
+            user.getPassword()
+        );
+
+        if (!passwordMatch) {
+            throw new BusinessException(errorMessage);
+        }
+
+        return "Giriş başarılı";
     }
 }

@@ -1,18 +1,15 @@
 package com.turkcell.spring_starter.dto;
 
-
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
 
-public class RegisterRequest {
+public class LoginRequest {
 
     @NotBlank(message = "Email boş olamaz")
     @Email(message = "Geçerli bir email giriniz")
     private String email;
 
     @NotBlank(message = "Şifre boş olamaz")
-    @Size(min = 3, message = "Şifre en az 3 karakter olmalı")
     private String password;
 
     public String getEmail() {
@@ -30,5 +27,4 @@ public class RegisterRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
