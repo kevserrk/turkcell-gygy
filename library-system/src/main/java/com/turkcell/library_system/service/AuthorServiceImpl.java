@@ -54,7 +54,7 @@ public class AuthorServiceImpl {
     // GET BY ID
     public ListAuthorResponse getById(Long id) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("Author not found"));
+                .orElseThrow(() -> new RuntimeException("Author not found"));
 
         ListAuthorResponse response = new ListAuthorResponse();
         response.setAuthorId(author.getAuthorId());
@@ -67,7 +67,7 @@ public class AuthorServiceImpl {
     // UPDATE
     public ListAuthorResponse update(Long id, UpdateAuthorRequest request) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("Author not found"));
+                .orElseThrow(() -> new RuntimeException("Author not found"));
 
         author.setFirstName(request.getFirstName());
         author.setLastName(request.getLastName());

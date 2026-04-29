@@ -5,6 +5,7 @@ import com.turkcell.library_system.dto.book.UpdateBookRequest;
 import com.turkcell.library_system.dto.book.CreatedBookResponse;
 import com.turkcell.library_system.dto.book.ListBookResponse;
 import com.turkcell.library_system.entity.Book;
+import com.turkcell.library_system.exception.BookNotFoundException;
 import com.turkcell.library_system.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +58,7 @@ public class BookServiceImpl {
     //  GET BY ID
     public ListBookResponse getById(Integer id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException());
 
         ListBookResponse response = new ListBookResponse();
         response.setBookId(book.getBookId());
@@ -71,7 +72,7 @@ public class BookServiceImpl {
     // UPDATE
     public ListBookResponse update(Integer id, UpdateBookRequest request) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException());
 
         book.setTitle(request.getTitle());
         book.setPublicationYear(request.getPublicationYear());

@@ -9,6 +9,16 @@
             "projectName": "spring-starter",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LibrarySystemApplication<library-system>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.turkcell.library_system.LibrarySystemApplication",
+            "projectName": "library-system",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
