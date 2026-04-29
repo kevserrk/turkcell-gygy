@@ -2,6 +2,7 @@ package com.turkcell.library_system.service;
 
 import com.turkcell.library_system.dto.borrow.*;
 import com.turkcell.library_system.entity.*;
+import com.turkcell.library_system.exception.BusinessException;
 import com.turkcell.library_system.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,10 @@ public class BorrowServiceImpl {
                 .orElseThrow(() -> new RuntimeException("Book not found"));
 
         Student student = studentRepository.findById(request.getStudentId())
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new BusinessException("Student not found","STUDENT_NOT_FOUND"));
 
         LibraryStaff staff = staffRepository.findById(request.getStaffId())
-                .orElseThrow(() -> new RuntimeException("Staff not found"));
+                .orElseThrow(() -> new BusinessException("Staff not found","STAFF_NOT_FOUND"));
 
         Borrow borrow = new Borrow();
         borrow.setBook(book);

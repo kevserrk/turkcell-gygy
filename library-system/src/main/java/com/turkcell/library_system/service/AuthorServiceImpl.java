@@ -67,7 +67,7 @@ public class AuthorServiceImpl {
     // UPDATE
     public ListAuthorResponse update(Long id, UpdateAuthorRequest request) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new BusinessException("Author not found", "AUTHOR_NOT_FOUND"));
 
         author.setFirstName(request.getFirstName());
         author.setLastName(request.getLastName());
