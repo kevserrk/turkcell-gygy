@@ -58,14 +58,14 @@ public class BookServiceImpl {
     //  GET BY ID
     public ListBookResponse getById(Integer id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException());
-
+                .orElseThrow(BookNotFoundException::new);
+    
         ListBookResponse response = new ListBookResponse();
         response.setBookId(book.getBookId());
         response.setTitle(book.getTitle());
         response.setPublicationYear(book.getPublicationYear());
         response.setCopiesTotal(book.getCopiesTotal());
-
+    
         return response;
     }
 

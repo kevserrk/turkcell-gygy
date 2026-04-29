@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public String handleBusinessException(BusinessException e) {
-        return e.getMessage();
+    public ErrorResponse handleBusinessException(BusinessException e){
+        return new ErrorResponse(e.getMessage());
     }
 }
