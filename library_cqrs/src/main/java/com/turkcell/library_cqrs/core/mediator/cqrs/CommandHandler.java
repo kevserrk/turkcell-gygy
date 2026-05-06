@@ -1,6 +1,6 @@
 package com.turkcell.library_cqrs.core.mediator.cqrs;
 
-public interface CommandHandler<C extends Command<R>, R> {
 
+public interface CommandHandler<C extends Command<R>, R> {
     R handle(C command);
 }
