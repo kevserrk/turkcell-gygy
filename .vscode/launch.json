@@ -19,6 +19,26 @@
             "projectName": "library-system",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringCqrsApplication<spring_cqrs>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.turkcell.spring_cqrs.SpringCqrsApplication",
+            "projectName": "spring_cqrs",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LibraryCqrsApplication<library_cqrs>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.turkcell.library_cqrs.LibraryCqrsApplication",
+            "projectName": "library_cqrs",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
