@@ -18,6 +18,7 @@ public class CreateBookCommandHandler
 
     @Override
     public CreatedBookResponse handle(CreateBookCommand command) {
+        
 
         Book book = new Book();
 
