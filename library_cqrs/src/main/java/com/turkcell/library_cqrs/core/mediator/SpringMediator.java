@@ -1,63 +1,76 @@
 package com.turkcell.library_cqrs.core.mediator;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
 
-import com.turkcell.library_cqrs.core.mediator.cqrs.Command;
-import com.turkcell.library_cqrs.core.mediator.cqrs.CommandHandler;
-import com.turkcell.library_cqrs.core.mediator.cqrs.Query;
-import com.turkcell.library_cqrs.core.mediator.cqrs.QueryHandler;
-
+import com.turkcell.library_cqrs.core.mediator.pipeline.PipelineBehavior;
+import com.turkcell.library_cqrs.core.mediator.pipeline.RequestHandlerDelegate;
 
 @Component
-public class SpringMediator implements Mediator
-{
-    private final ApplicationContext context;
-    public SpringMediator(ApplicationContext context) {
-        this.context = context;
+public class SpringMediator implements Mediator {
+
+    private final ApplicationContext applicationContext;
+    private final List<PipelineBehavior> pipelineBehaviors;
+
+    public SpringMediator(
+            ApplicationContext applicationContext,
+            List<PipelineBehavior> pipelineBehaviors) {
+
+        this.applicationContext = applicationContext;
+        this.pipelineBehaviors = pipelineBehaviors;
     }
 
     @Override
-    public <R> R send(Command<R> command) {
-        var handler = (CommandHandler<Command<R>, R>) resolveHandler(command.getClass(), CommandHandler.class);
+    public <R> R send(Object request) {
 
-        return handler.handle(command);
-    }
+        Object handler = findHandler(request);
 
-    @Override
-    public <R> R send(Query<R> query) {
-        var handler = (QueryHandler<Query<R>, R>) resolveHandler(query.getClass(), QueryHandler.class);
+        RequestHandlerDelegate<R> delegate =
+                () -> invokeHandler(handler, request);
 
-        return handler.handle(query);
-    }
+        for (PipelineBehavior behavior : pipelineBehaviors) {
 
-    // Hangi command/query -> hangi handler?
-    private Object resolveHandler(Class<?> requestType, Class<?> handlerInterface) {
-        // TODO: Refactor & Add Caching
+            RequestHandlerDelegate<R> next = delegate;
 
-        // Tüm handlerları gez, komutla/query ile uyuşanı dön.
-        String[] beanNames = context.getBeanNamesForType(handlerInterface);
-
-        for(String beanName: beanNames)
-        {
-            Class<?> beanClass = context.getType(beanName);
-            if(beanClass == null) continue;
-
-            ResolvableType[] interfaces = ResolvableType.forClass(beanClass).getInterfaces();
-
-            for(ResolvableType iface: interfaces)
-            {
-                if(iface.getRawClass() != null && handlerInterface.isAssignableFrom(iface.getRawClass()))
-                {
-                    Class<?> firstGeneric = iface.getGeneric(0).resolve();
-
-                    if(firstGeneric != null && firstGeneric.equals(requestType))
-                        return context.getBean(beanName);
-                }
-            }
+            delegate = () -> behavior.handle(request, next);
         }
-        throw new IllegalStateException("Handler bulunamadı." + requestType.getSimpleName());
+
+        return delegate.invoke();
     }
 
+    private Object findHandler(Object request) {
+
+        String handlerName =
+                request.getClass().getSimpleName() + "Handler";
+
+        return applicationContext.getBeansOfType(Object.class)
+                .values()
+                .stream()
+                .filter(bean ->
+                        bean.getClass()
+                                .getSimpleName()
+                                .equals(handlerName))
+                .findFirst()
+                .orElseThrow();
+    }
+
+    @SuppressWarnings("unchecked")
+    private <R> R invokeHandler(Object handler, Object request) {
+
+        try {
+
+            Method method =
+                    handler.getClass()
+                            .getMethod("handle",
+                                    request.getClass());
+
+            return (R) method.invoke(handler, request);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
