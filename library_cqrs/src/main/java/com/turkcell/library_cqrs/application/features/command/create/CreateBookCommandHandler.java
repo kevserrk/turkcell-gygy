@@ -18,6 +18,10 @@ public class CreateBookCommandHandler
 
     @Override
     public CreatedBookResponse handle(CreateBookCommand command) {
+        try {                                       //deneme için 
+            Thread.sleep(4000);
+        } catch (Exception e) {
+        }
         
 
         Book book = new Book();
