@@ -15,6 +15,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+import java.util.List;
+
 @Service
 @EnableConfigurationProperties(JwtProperties.class)
 public class JwtService {
@@ -28,18 +30,27 @@ public class JwtService {
         this.signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generate(UUID userId, String email)
+    public String generate(UUID userId, String email, String role)
     {
-        Instant now = Instant.now();
-        return Jwts.builder()
-                   .issuer(this.jwtProperties.getIssuer())
-                   .subject(userId.toString())
-                   .claim("email", email)
-                   .claim("deneme", "deneme")
-                   .issuedAt(Date.from(now))
-                   .expiration(Date.from(now.plusSeconds(this.jwtProperties.getExpirationInSeconds())))
-                   .signWith(this.signingKey)
-                   .compact();
+    Instant now = Instant.now();
+
+    return Jwts.builder()
+               .issuer(this.jwtProperties.getIssuer())
+               .subject(userId.toString())
+               .claim("email", email)
+               .claim("roles", List.of(role))
+               .issuedAt(Date.from(now))
+               .expiration(Date.from(now.plusSeconds(this.jwtProperties.getExpirationInSeconds())))
+               .signWith(this.signingKey)
+               .compact();
+    }
+
+    public List<String> extractRoles(String token)
+    {
+    return extractClaim(
+        token,
+        claims -> claims.get("roles", List.class)
+    );
     }
     
     public String extractUserId(String token) 

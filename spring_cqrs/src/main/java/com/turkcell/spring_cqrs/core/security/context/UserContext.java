@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class UserContext {
     private String userId;
     private String email;
-    private List<String> roles = Collections.EMPTY_LIST;
+    private List<String> roles = Collections.emptyList();
     private boolean isAuthenticated = false;
 
     public void setUser(String userId, String email, List<String> roles) {

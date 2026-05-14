@@ -31,7 +31,11 @@ public class LoginCommandHandler implements CommandHandler<LoginCommand, LoginRe
             throw new RuntimeException("Invalid credentials");
         }
 
-        String jwt = jwtService.generate(user.getId(), user.getEmail());
+        String jwt =
+        jwtService.generate(
+                user.getId(),
+                user.getEmail(),
+                user.getRole());
         return new LoginResponse(jwt);
     }
 }

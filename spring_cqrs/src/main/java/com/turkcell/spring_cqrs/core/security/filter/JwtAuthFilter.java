@@ -15,6 +15,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.turkcell.spring_cqrs.core.security.exception.AuthenticatedException;
+
 // Her istekte devreye gir, varsa JWT'i doğrula ve sisteme bak bu kişi şu jwt ile girdi bilgisini tanıt.. 
 
 @Component
@@ -28,32 +30,37 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-                // request -> istek
-                // response -> response'ın o ana kadarki oluşan halini 
-                // filterChain -> zincirin kendisi
-            String jwtHeader = request.getHeader("Authorization");
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain)
+        throws ServletException, IOException {
 
-            if(jwtHeader != null) {
-                String token = jwtHeader.substring(7);
+    String jwtHeader = request.getHeader("Authorization");
 
-                // JWT'i doğrula, kullanıcıyı bul ve sisteme tanıt..
-                try{
-                    if(jwtService.isTokenValid(token))
-                    {
-                        // Kullanıcıyı sisteme tanıt..
-                        String userId = jwtService.extractUserId(token);
-                        String email = jwtService.extractEmail(token);
-                        List<String> roles = Collections.EMPTY_LIST; //TODO: Implement
-                        userContext.setUser(userId, email, roles);
-                    }
-                }catch(Exception e){
-                    // SecurityContextHolder.Clear();
-                }
+    if(jwtHeader != null && jwtHeader.startsWith("Bearer "))
+    {
+        String token = jwtHeader.substring(7);
+
+        try{
+            if(jwtService.isTokenValid(token))
+            {
+                String userId = jwtService.extractUserId(token);
+                String email = jwtService.extractEmail(token);
+                List<String> roles = jwtService.extractRoles(token);
+
+                userContext.setUser(userId, email, roles);
             }
-
-            filterChain.doFilter(request, response); // chaini ilerlet..
+            else {
+                throw new AuthenticatedException("Invalid JWT token");
+            }
+        }
+        catch(Exception e){
+            throw new AuthenticatedException("Authentication failed");
+        }
     }
+
+    filterChain.doFilter(request, response);
+}
 
 }
