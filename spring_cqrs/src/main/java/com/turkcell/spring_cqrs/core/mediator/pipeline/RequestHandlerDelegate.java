@@ -1,6 +1,6 @@
 package com.turkcell.spring_cqrs.core.mediator.pipeline;
 
-public class RequestHandlerDelegate {
-
-    
+@FunctionalInterface
+public interface RequestHandlerDelegate<R> {
+    R invoke();
 }
